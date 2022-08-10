@@ -1,3 +1,4 @@
+//array to store the images
 let imgs = ['/Dice_Images/dice_1.png',
     '/Dice_Images/dice_2.png',
     '/Dice_Images/dice_3.png',
@@ -6,6 +7,7 @@ let imgs = ['/Dice_Images/dice_1.png',
     '/Dice_Images/dice_6.png'
 ];
 
+//variables
 let player1Score = 0;
 let player2Score = 0;
 let play1Turn = true;
@@ -31,7 +33,7 @@ function shakeDice() {
                 dice.classList.remove("active");
             });
         },
-        1000
+        1000 //1s
     );
 }
 
@@ -51,15 +53,6 @@ function checkEqual(r1, r2) {
     let totalValue = 0;
 
     if (r1 === r2 && !(r1 === 1)) {
-        if (play1Turn === true) {
-            msg.textContent = "Player 1 another Turn";
-            console.log("Play 1 random equal");
-        } else if (play1Turn === false) {
-            msg.textContent = "Player 2 another Turn";
-            console.log("Play 2 random equal");
-        } else {
-            msg.textContent = "Something went wrong";
-        }
         shakeDice();
         let randomN = numberGenerator()
         console.log(randomN);
@@ -69,7 +62,6 @@ function checkEqual(r1, r2) {
         console.log("Play 2 random equal after 1 player");
     } else if (r1 === 1 && r2 === 1) {
         totalValue = 0;
-        console.log("No equal value");
     }
     return totalValue;
 }
@@ -92,40 +84,39 @@ function reset() {
 
 rollDiceBtn.addEventListener("click", function() {
 
-    let randomN = numberGenerator();
-    console.log(randomN);
-    const r1 = randomN[0];
-    const r2 = randomN[1];
-    let totalNumber = r1 + r2;
-    let newTotal = 0;
+
 
     if (play1Turn) {
         //first roll
         shakeDice();
+        let randomN = numberGenerator();
+        console.log(randomN);
+        const r1 = randomN[0];
+        const r2 = randomN[1];
+        let totalNumber = r1 + r2;
+        let newTotal = 0;
         player1Score += totalNumber;
-        // console.log("ply1Score", player1Score)
         player1Scoreboard.textContent = player1Score
-            //check whether the numbers are equal
         newTotal = checkEqual(r1, r2);
         player1Score += newTotal;
         player1Scoreboard.textContent = player1Score;
-        // console.log("New total after random eqaul", player1Score);
         msg.textContent = "Player 2 Turn";
-        // console.log("play 2 turn");
 
     } else {
         shakeDice();
+        let randomN = numberGenerator();
+        console.log(randomN);
+        const r1 = randomN[0];
+        const r2 = randomN[1];
+        let totalNumber = r1 + r2;
+        let newTotal = 0;
         player2Score += totalNumber;
         player2Scoreboard.textContent = player2Score;
-        // console.log("ply2Score", player2Score);
         newTotal = checkEqual(r1, r2);
         player2Score += newTotal;
         player2Scoreboard.textContent = player2Score;
-        // console.log("New total after random eqaul", player2Score);
         msg.textContent = "Player 1 Turn";
-        // console.log("play 1 turn");
     }
-
 
     if (player1Score >= 100) {
         msg.textContent = "Congratulations! Player 1 has won the game";
@@ -141,3 +132,13 @@ rollDiceBtn.addEventListener("click", function() {
         reset();
     })
 })
+
+
+// console.log("ply2Score", player2Score);
+// console.log("play 1 turn");
+// console.log("New total after random eqaul", player2Score);
+// console.log("play 2 turn");
+// console.log("New total after random eqaul", player1Score);
+//check whether the numbers are equal
+// console.log("ply1Score", player1Score)
+// console.log("No equal value");
